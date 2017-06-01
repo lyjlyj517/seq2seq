@@ -3,7 +3,7 @@
 
 import sys
 import numpy as np
-import mecab as mcb
+#import mecab as mcb
 import chainer
 from chainer import cuda, Function, gradient_check, Variable, optimizers, serializers, utils
 from chainer import Link, Chain, ChainList
@@ -105,8 +105,10 @@ def main(mpath, utt_file, res_file):
             print "Bye!!"
             sys.exit(0)
 
-        jln = mcb.construct_BoW(utterance)
-        jlnr = jln[::-1]
+        #jln = mcb.construct_BoW(utterance)
+        #jlnr = jln[::-1]
+        jlnr = utterance.split('　') #input should be split with space.
+        print jlnr
         mt(model, jlnr, id2wd, jvocab, evocab)
 
 
@@ -123,13 +125,13 @@ Args:
     [responseDB]: The argument is response corpus to gain the distributed representation of words.                                                                       
 """.rstrip()
 
-    if len(argvs) < 4:
-        print _usage
-        sys.exit(0)
+    #if len(argvs) < 4:
+    #    print _usage
+    #    sys.exit(0)
 
 
-    model = argvs[1]
-    utt_file = argvs[2]
-    res_file = argvs[3]
+    model =    './model/seq2seq-10.model'#argvs[1]
+    utt_file = 'Utterance_wakati.txt'   #argvs[2]
+    res_file = 'Response_wakati.txt'    #argvs[3]
 
     main(model, utt_file, res_file)

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-                                                                                                                                                  
 
 import sys
+import os
 import numpy as np
 import chainer
 from chainer import cuda, Function, gradient_check, Variable, optimizers, serializers, utils
@@ -40,7 +41,7 @@ class seq2seq(chainer.Chain):
         return accum_loss
 
 def main(epochs, urr_file, res_file, out_path):
-
+    #utterance
     jvocab = {}
     jlines = open(utt_file).read().split('\n')
     for i in range(len(jlines)):
@@ -51,7 +52,8 @@ def main(epochs, urr_file, res_file, out_path):
 
     jvocab['<eos>'] = len(jvocab)
     jv = len(jvocab)
-
+    
+    #response
     evocab = {}
     elines = open(res_file).read().split('\n')
     for i in range(len(elines)):
@@ -59,28 +61,35 @@ def main(epochs, urr_file, res_file, out_path):
         for w in lt:
             if w not in evocab:
                 evocab[w] = len(evocab)
-                ev = len(evocab)
+    
+    evocab['<eos>'] = len(evocab)    
+    ev = len(evocab)
 
-        demb = 100
-        model = seq2seq(jv, ev, demb, jvocab, evocab)
-        optimizer = optimizers.Adam()
-        optimizer.setup(model)
-
-        for epoch in range(epochs):
-            for i in range(len(jlines)-1):
-                jln = jlines[i].split()
-                jlnr = jln[::-1]
-                eln = elines[i].split()
-                model.H.reset_state()
-                model.zerograds()
-                loss = model(jlnr, eln, jvocab, evocab)
-                loss.backward()
-                loss.unchain_backward()
-                optimizer.update()
-                print i, " finished"        
-
-            outfile = out_path + "/seq2seq-" + str(epoch) + ".model"
-            serializers.save_npz(outfile, model)
+    demb = 100
+    model = seq2seq(jv, ev, demb, jvocab, evocab)
+    optimizer = optimizers.Adam()
+    optimizer.setup(model)
+    
+    if(not os.path.exists(out_path)):
+            os.mkdir(out_path)
+    
+    for epoch in range(epochs):
+        print 'epoch:\t', epoch
+        for i in range(len(jlines)-1):
+            jln = jlines[i].split()
+            jlnr = jln[::-1]
+            eln = elines[i].split()
+            model.H.reset_state()
+            model.zerograds()
+            loss = model(jlnr, eln, jvocab, evocab)
+            loss.backward()
+            loss.unchain_backward()
+            optimizer.update()
+            print i, " finished"        
+        
+        #save each epoch
+        outfile = out_path + "/seq2seq-" + str(epoch) + ".model"
+        serializers.save_npz(outfile, model)
 
 
 
@@ -98,15 +107,14 @@ Args:
     [save_link]: The argument is output directory to save trained models.                                                                                                
 """.rstrip()
 
-    if len(argvs) < 5:
-        print _usage
-        sys.exit(0)
+    #if len(argvs) < 5:
+    #    print _usage
+    #    sys.exit(0)
 
 
-    epochs = int(argvs[1])
-    utt_file = argvs[2]
-    res_file = argvs[3]
-    out_path = argvs[4]
+    epochs = 30                         #int(argvs[1]) 
+    utt_file = 'Utterance_wakati.txt'   #argvs[2]
+    res_file = 'Response_wakati.txt'    #argvs[3]
+    out_path =  './model'               #argvs[4]
 
     main(epochs, utt_file, res_file, out_path)
-
