@@ -1,0 +1,46 @@
+＝＝＝＝
+対話破綻検出チャレンジ　開発・評価データ利用規約
+
+本データはMITライセンスのもと，無償・無保障にて研究用・商用を問わず利用できます．
+
+ただし，本データを利用して得た成果を学会等で発表する際には，本データについての下記の報告・論文を引用してください．
+○　研究報告
+対話破綻検出チャレンジ2
+The Dialogue Breakdown Detection Challenge 2
+東中 竜一郎,船越 孝太郎,稲葉 通将, 荒瀬 由紀, 角森 唯子
+人工知能学会　言語・音声理解と対話処理研究会 第78回(第7回対話システムシンポジウム), pp.64-69, 2016-10-5.
+
+また対話データを収集した各システムに言及する場合は，下記に示す対話システムに関するURL・論文を適宜引用して下さい．
+○　データ収集元対話システム:
+-NTT Docomo 雑談対話API: https://www.nttdocomo.co.jp/service/developer/smart_phone/analysis/chat/
+-H. Tsukahara and K. Uchiumi. System utterance generation by label propagation over association graph
+of words and utterance patterns for open-domain dialogue systems. Proceedings of the 29th Pacific Asia Conference on Language, Information and Computation (PACLIC 2015), pp.323-331, (Oct. 2015).
+-塚原裕史, 内海 慶. 対話行為と話題推定によるラベル伝搬を利用した雑談生成方法の改良. 第30回人工知能学会年次大会 (2016年6月).
+-A. Ritter, C. Cherry, and W. B. Dolan. Data-driven response generation in social media. Proceedings of Empirical Methods in Natural Language Processing (EMNLP 2011), pp. 583-593, (Jan. 2011).
+
+----------------------
+Copyright (c) 2016 対話破綻検出チャレンジ事務局 and 人工知能学会
+
+Permission is hereby granted, free of charge, to any person obtaining a copy 
+of this software and associated documentation files (the "Software"), to deal 
+in the Software without restriction, including without limitation the rights 
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell 
+copies of the Software, and to permit persons to whom the Software is 
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in 
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+＝＝＝＝
+
+改訂履歴
+2016/10/24 初版
+
+問い合わせ先：
+dialoguebreakdowndetection-admin@googlegroups.com
