@@ -44,9 +44,9 @@ class seq2seq(chainer.Chain):
 def mt(model, jline, id2wd, jvocab, evocab):
     for i in range(len(jline)):
         wid = jvocab[jline[i]]
-        x_k = model.embedx(Variable(np.array([wid], dtype=np.int32), volatile='on'))
+        x_k = model.embedx(Variable(np.array([wid], dtype=np.int32)))
         h = model.H(x_k)
-    x_k = model.embedx(Variable(np.array([jvocab['<eos>']], dtype=np.int32), volatile='on'))
+    x_k = model.embedx(Variable(np.array([jvocab['<eos>']], dtype=np.int32)))
     h = model.H(x_k)
     wid = np.argmax(F.softmax(model.W(h)).data[0])
     if wid in id2wd:
@@ -55,7 +55,7 @@ def mt(model, jline, id2wd, jvocab, evocab):
         print wid,
     loop = 0
     while (wid != evocab['<eos>']) and (loop <= 30):
-        x_k = model.embedy(Variable(np.array([wid], dtype=np.int32), volatile='on'))
+        x_k = model.embedy(Variable(np.array([wid], dtype=np.int32)))
         h = model.H(x_k)
         wid = np.argmax(F.softmax(model.W(h)).data[0])
         if wid in id2wd:
@@ -108,7 +108,6 @@ def main(mpath, utt_file, res_file):
         #jln = mcb.construct_BoW(utterance)
         #jlnr = jln[::-1]
         jlnr = utterance.split('　') #input should be split with space.
-        print jlnr
         mt(model, jlnr, id2wd, jvocab, evocab)
 
 
